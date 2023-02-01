@@ -44,7 +44,8 @@ public class StudentFormController {
             emailTextField.getText(),
             phoneTextField.getText(), 
             2);
-        
+        student.save();
+
         data.addStudent(student);
         
         App.setRoot("studentList");

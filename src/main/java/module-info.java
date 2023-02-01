@@ -1,5 +1,6 @@
 module com.example.pabloperezmartinez {
     requires javafx.controls;
+    requires java.sql;
     requires javafx.fxml;
 
     opens com.example.models;

@@ -1,6 +1,11 @@
 package com.example.models;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
+
+import com.dbhander.PostgresConnect;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -89,10 +94,27 @@ public class Student extends Person {
     }
 
     /**
-     * Gets simple string property from age
+     * Gets simple string property from age student.save();
      * @return
      */
     public SimpleIntegerProperty ageProperty() {
         return new SimpleIntegerProperty(this.getAge());
+    }
+
+    public void save(){
+        final String sql = "INSERT INFO student " + 
+        "(id, first_name, last_name, email) VALUES"+"(?,?,?,?)";
+        PostgresConnect pgConnect=new PostgresConnect();
+        Connection connection = pgConnect.getConnection();
+        try(PreparedStatement preparedStatement= connection.prepareStatement(sql)){
+            preparedStatement.setString(1, this.getId());
+            preparedStatement.setString(1, this.getFirstName());
+            preparedStatement.setString(1, this.getLastName());
+            preparedStatement.setString(1, this.getEmail());
+            preparedStatement.executeUpdate();
+
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        } 
     }
 }

@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import com.dbhander.PostgresConnect;
+
 /**
  * JavaFX App
  */
@@ -33,6 +35,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        PostgresConnect pgConnect= new PostgresConnect();
+        pgConnect.getConnection();
         launch();
     }
 }
